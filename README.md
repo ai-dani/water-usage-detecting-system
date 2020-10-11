@@ -9,4 +9,4 @@ Graphical Data implemented in Java and JavaFX platform to display the timely wat
 
 PDF File containing storyboard designs of the UI made on Adobe Xd.
 
-Starter Flutter App: (note: not implemented, but learned) While not fully executed, team members learned how to program basics using Dart Language. Adobe Xd can be a possible plug in to integrate UI into Flutter for use in future. (main.dart)
+Starter Flutter App: (note: not fully implemented due to time contraints, but learned) Team members learned how basic UI structure of Flutter using Dart Language. Adobe Xd can be a possible plug in to integrate UI assets into Flutter for use in future. (main.dart)
