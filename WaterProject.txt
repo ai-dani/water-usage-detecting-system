@@ -1,0 +1,157 @@
+import java.util.Scanner;
+
+public class WaterMain
+{
+    final double BATH_FLOW = 1.5; //gallons per minute
+	final double KIT_FLOW = 2.2;
+	final double SHOW_FLOW = 2.1;
+	public static void main(String[] args)
+	{
+	    int i = 0;
+	    String sink = "";
+	    WaterMain main = new WaterMain();
+	    do
+	    {
+	        printMenu();
+	        Scanner scan = new Scanner(System.in);
+            String input = scan.nextLine();
+            switch(input)
+            {
+             case "A":
+                sink =  main.sinkType();
+                break;
+            case "B":
+                main.calculateWaterUsage(sink);
+                break;
+            case "C":
+                main.waterBillCalculation(sink);
+                break;
+            case "D":
+                main.waterUsagePercentage(sink);
+                break;
+            case "Q":
+                i++;
+                break;
+            default:
+                System.out.println("Enter a valid input");
+            }
+	    }while(i < 1);
+	}
+	
+	public double calculateWaterUsage(String sink)
+	{
+	    String sinkType = sink;
+	    double result = 0;
+	    int max = 100;
+	    int min = 1;
+	    int range = max - min + 1;
+	    if(sinkType == "Bathroom")
+	    {
+	        result = (BATH_FLOW * (int)(Math.random() * range)) / 60;
+	    }
+	    else if(sinkType == "Kitchen")
+	    {
+	        result = (KIT_FLOW * (int)(Math.random() * range)) / 60;
+	    }
+	    else
+	    {
+	        result = (SHOW_FLOW * (int)(Math.random() * range)) / 60;
+	    }
+	    System.out.println(result + " gallons per minute");
+		return result;
+	}
+	
+	public double waterBillCalculation(String sink)
+	{
+	    String sinkType = sink;
+	    double result = 0;
+	    int max = 100;
+	    int min = 1;
+	    int range = max - min + 1;
+	    if(sinkType == "Bathroom")
+	    {
+	        result = (BATH_FLOW * (int)(Math.random() * range)) / 5;
+	    }
+	    else if(sinkType == "Kitchen")
+	    {
+	        result = (KIT_FLOW * (int)(Math.random() * range)) / 5;
+	    }
+	    else
+	    {
+	        result = (SHOW_FLOW * (int)(Math.random() * range)) / 5;
+	    }
+	    System.out.println("Water Bill: $" + result);
+		return result;
+	}
+	
+	public double waterUsagePercentage(String sink)
+	{
+		String sinkType = sink;
+	    double result = 0;
+	    int max = 100;
+	    int min = 1;
+	    int range = max - min + 1;
+	    if(sinkType == "Bathroom")
+	    {
+	        result = (int)(BATH_FLOW * (int)(Math.random() * range)) / 4;
+	        System.out.println("Bathroom Sinks Use: " + result + "% of the water.");
+	    }
+	    else if(sinkType == "Kitchen")
+	    {
+	        result = (int)(KIT_FLOW * (int)(Math.random() * range)) / 4;
+	        System.out.println("Kitchen Sinks Use: " + result + "% of the water.");
+	    }
+	    else
+	    {
+	        result = (int)(SHOW_FLOW * (int)(Math.random() * range)) / 4;
+	        System.out.println("Showers Use: " + result + "% of the water.");
+	    }
+		return result;
+	}
+	
+	public String sinkType()
+	{
+	    String result = "";
+	    System.out.print("Choice\t\tSink Type\n" +
+                "------\t\t------\n" +
+                "A\t\tBathroom\n" +
+                "B\t\tKitchen\n" +
+                "C\t\tShower\n" +
+                "Q\t\tQuit\n" +
+                "?\t\tDisplay Help\n\n");
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        switch(input)
+        {
+            case "A":
+                result = "Bathroom";
+                break;
+            case "B":
+                result = "Kitchen";
+                break;
+            case "C":
+                result = "Shower";
+                break;
+            case "Q":
+                break;
+            default:
+                System.out.println("Enter a valid input");
+        }
+        System.out.println(result + " selected");
+	    return result;
+	}
+	
+	public static void printMenu()
+	{
+	    System.out.println("\tWelcome to DRIP");
+		System.out.print("Choice\t\tMain Menu\n" +
+                "------\t\t------\n" +
+                "A\t\tChoose Sink Type\n" +
+                "B\t\tCalculate Water Usage\n" +
+                "C\t\tCalculate Water Bill\n" +
+                "D\t\tCalculate Water Usage Percentage\n" +
+                "Q\t\tQuit\n" +
+                "?\t\tDisplay Help\n\n");
+	}
+
+}
