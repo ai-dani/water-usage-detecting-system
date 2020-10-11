@@ -1,4 +1,4 @@
-# Project Drip: Water Usage Detection and Conservation System
+# Project Drip: Water Usage Detection and Conservation System (First Hackathon wooooooo!)
 Project submission for SunHacks 2020
 
 Includes:
