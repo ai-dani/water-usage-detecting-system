@@ -2,6 +2,7 @@
 Project submission for SunHacks 2020
 
 Includes:
+
 Java program that simulates the primary usage of application: including prompts for sink type, calculation of water output using defined averages of water flow rate (gpm), water bills, etc.
 
 Graphical Data implemented in Java and JavaFX platform to display the timely water bills that will be displayed and integrated onto an app.
