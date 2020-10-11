@@ -1,0 +1,192 @@
+//Name:Zhicheng Lin
+
+package application;
+	
+import javafx.application.Application;
+import javafx.stage.Stage;
+import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.Group;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.ScatterChart;
+import javafx.scene.chart.XYChart;
+import java.io.FileReader;
+import java.io.PrintWriter;
+import java.util.Scanner;
+import java.io.*;
+
+public class Main extends Application {
+	@Override
+	public void start(Stage stage) 
+	{
+		NumberAxis month= new NumberAxis(1,13,1);
+		month.setLabel("Month");
+		
+		NumberAxis bill= new NumberAxis(0,150,6);
+		bill.setLabel("bills in $(dollars)");
+		
+		ScatterChart<Number,Number> graph=new ScatterChart(month,bill);
+		XYChart.Series prepareData=new XYChart.Series();
+		
+		int[][] data=new int[100][100];
+		
+		try
+		{	
+			FileReader file= new FileReader("Data");
+			PrintWriter printOut = new PrintWriter("Data");
+			PrintWriter WeekprintOut = new PrintWriter("WeekData");
+			int first=0;
+			for(int i=0; i<13;i++)
+			{
+				for (int j=0; j<data[0].length; j++)
+				{
+					if(i<4)
+					{
+						data[i][j]=(int)(Math.random()*18000)+1;
+					}
+					else if(i>4&&i<8)
+					{
+						data[i][j]=(int)(Math.random()*13000)+1;
+					}
+					else
+					{
+						data[i][j]=(int)(Math.random()*9000)+1;
+
+					}
+					printOut.println(data[i][j]);	
+					
+					if(j%25==0&&first!=0)
+					{
+						WeekprintOut.println();
+					}
+					WeekprintOut.println(data[i][j]);
+					first=1;
+				}
+				printOut.println();
+			}
+			printOut.close();
+			WeekprintOut.close();
+			file.close();
+		}
+		catch(IOException exception)
+		{
+			System.out.print(exception.getMessage());
+		}
+		
+		
+		double [] monthAverage=new double[13];
+		String control;
+		int position=0;
+		try
+		{	
+			FileReader file= new FileReader("Data");
+			Scanner read = new Scanner(file);
+		
+			while(read.hasNextLine())
+			{
+				
+				if (read.nextLine().isEmpty()==false)
+				{		
+					control=read.nextLine();
+					monthAverage[position]+=Integer.parseInt(control);	
+				}
+				else
+				{
+					position++;
+				}
+			}
+			read.close();
+			file.close();
+		}
+		catch(IOException exception)
+		{
+			System.out.print(exception.getMessage());
+		}
+		
+		
+		final double PRICEPERGERLON=0.003;
+		double random =(Math.random()+1)*10;
+		for(int i=0; i<13; i++)
+		{
+			monthAverage[i]=monthAverage[i]/random;
+			monthAverage[i]=monthAverage[i]*PRICEPERGERLON;
+
+			prepareData.getData().add(new XYChart.Data(i,monthAverage[i]));
+		}
+		graph.getData().addAll(prepareData);
+//------------------------------------------------------------------------------------	
+		//------------------------------------------------------------------------------------		
+		HBox collection= new HBox();
+	
+		NumberAxis week= new NumberAxis(1,4,1);
+		week.setLabel("Month 1, Weeks");
+		
+		NumberAxis weekBill= new NumberAxis(0,80,6);
+		weekBill.setLabel("bills in $(dollars)");
+		
+		ScatterChart<Number,Number> Weekgraph=new ScatterChart(week,weekBill);
+		XYChart.Series WeekData=new XYChart.Series();
+		
+		
+		double [] WeekAverage=new double[5];
+		String Weekcontrol;
+		int Weekposition=0;
+		try
+		{	
+			FileReader file= new FileReader("WeekData");
+			Scanner Weekread = new Scanner(file);
+			int once =0;
+			
+			while(Weekread.hasNextLine()&&Weekposition<5)
+			{
+				if (Weekread.nextLine().isEmpty()==false)
+				{		
+					Weekcontrol=Weekread.next();
+					WeekAverage[Weekposition]+=Integer.parseInt(Weekcontrol);
+					Weekread.nextLine();
+				}
+				else
+				{
+					if(once!=0)
+					{
+						Weekposition++;
+					}
+				}
+				once=1;
+			}
+			Weekread.close();
+			file.close();
+		}
+		catch(IOException exception)
+		{
+			System.out.print(exception.getMessage());
+		}
+		
+		for(int i=0; i<5; i++)
+		{
+			WeekAverage[i]=(WeekAverage[i]/random)/2.0;
+			WeekAverage[i]=WeekAverage[i]*PRICEPERGERLON;
+
+			WeekData.getData().add(new XYChart.Data(i,WeekAverage[i]));
+		}
+		Weekgraph.getData().addAll(WeekData);
+		collection= new HBox(graph,Weekgraph);
+		
+
+
+		Scene scene = new Scene (collection,600,600);
+		stage.setTitle("Monthly water bill on average");
+		stage.setScene(scene);
+		stage.show();
+		
+		
+		
+		
+	}
+	
+	public static void main(String[] args) {
+		launch(args);
+	}
+}
