@@ -7,6 +7,6 @@ Java program that simulates the primary usage of application: including prompts 
 
 Graphical Data implemented in Java and JavaFX platform to display the timely water bills that will be displayed and integrated onto an app. (HACKSON.txt)
 
-PDF File containing storyboard designs of the UI made on Adobe Xd.
+Raw Adobe Xd File containing UI design implemenetations and animations, as well as a pdf file that consolidates it
 
 Starter Flutter App: (note: not fully implemented due to time contraints, but learned) Team members learned how basic UI structure of Flutter using Dart Language. Adobe Xd can be a possible plug in to integrate UI assets into Flutter for use in future. (main.dart)
